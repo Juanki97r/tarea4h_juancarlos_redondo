@@ -108,6 +108,8 @@ public class Animal {
     }
 
    
-    
+    public String toString(){
+        return "Animal [FechaNac: " + this.fechaNacimiento + " Nombre: "+ this.nombre+" Peso: "+this.peso+" Tipo: "+this.tipo+"]";
+    }
     
 }
