@@ -11,5 +11,8 @@ public class Prueba {
 
         System.out.println(animal1.toString());
         System.out.println(animal1);
+        System.out.println("---------------------");
+        animal1.setFechaNacimiento(LocalDate.of(2006, Month.MARCH, 10));
+        System.out.println(animal1);
     }
 }

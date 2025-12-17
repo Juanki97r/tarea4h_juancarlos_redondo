@@ -9,7 +9,7 @@ public class Animal {
     private String nombre;
     public static final String[] TIPO = {"gato","perro","cobaya", "lagarto", "periquito" };
     private String tipo;
-    private int peso;
+    private double peso;
     public static String[] ESTADO = {"comiendo","durmiento","reposando","jugando"};
     private String estado;
 
@@ -42,7 +42,7 @@ public class Animal {
     }
 
 
-    public Animal (LocalDate fechaNac,String nombre,int peso, String tipo ){
+    public Animal (LocalDate fechaNac,String nombre,double peso, String tipo ){
          if(!(fechaNac!=null && fechaNac.isAfter(LocalDate.of(2000, Month.JANUARY, 1)) && fechaNac.isBefore(LocalDate.now())) || !(peso>0 && peso<1000) || !recorrerTipos(tipo)) {
             throw new IllegalArgumentException("Has introducido un valor erroneo");
         }
@@ -50,7 +50,7 @@ public class Animal {
         this.nombre=nombre;
         this.peso=peso;
         this.tipo=tipo;
-        this.estado="reposo";
+        this.estado="reposando";
 
     }
 
@@ -91,11 +91,11 @@ public class Animal {
         this.tipo = tipo;
     }
 
-    public int getPeso() {
+    public double getPeso() {
         return peso;
     }
 
-    public void setPeso(int peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
@@ -112,4 +112,39 @@ public class Animal {
         return "Animal [FechaNac: " + this.fechaNacimiento + " Nombre: "+ this.nombre+" Peso: "+this.peso+" Tipo: "+this.tipo+"]";
     }
     
+    //metodo comer
+    public void comer(double cantidadGramos){
+        this.peso += Math.abs(cantidadGramos);
+        setEstado("comiendo");
+    }
+    //metodo dormir
+    public void dormir(){
+        setEstado("durmiendo");
+    }
+    //metodo despertar 
+    public void despertar(){
+        setEstado("reposando");
+    }
+    //metodo reposar
+    public void reposar(){
+        setEstado("reposando");
+
+    }
+    //metodo jugar
+    public void jugar(int minutosJugando){
+        setEstado("jugando");
+    
+        
+        if(Math.abs(minutosJugando)<30){
+           setPeso(this.peso * 0.9); //quitamos el 10% del peso
+           
+        }
+        if(Math.abs(minutosJugando)>=30){
+            int cantidadTreintaMin= minutosJugando/30;
+            setPeso(this.peso*(0.8*cantidadTreintaMin));
+        }
+        if(Math.abs(minutosJugando)>180){
+            throw new IllegalArgumentException("El animal no puede jugar tanto tiempo");
+        }
+    }
 }
